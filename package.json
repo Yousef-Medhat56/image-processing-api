@@ -4,7 +4,9 @@
   "description": "Image processing api project using TypeScript and Node.js",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon ./src/app.ts",
+    "build": "npx tsc",
+    "start": "node ./dist/app.js"
   },
   "author": "Yousef Medhat",
   "license": "ISC",
