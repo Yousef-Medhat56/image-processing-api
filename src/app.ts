@@ -1,14 +1,22 @@
-import * as express from "express"
+import * as express from "express";
 
-const app = express()
-const port = 7777
+//import routes
+import imageRoute from "./routes/imageRoute";
 
-app.get("/",(req,res)=>{
-    res.send("Hello Udacity")
-})
+const app = express();
+const port = 7777;
 
-app.listen(port,()=>{
-    console.log(`Server is running on port ${port}`)
-})
+app.get("/", (req, res) => {
+  res.send(
+    "Hello Udacity, <br/> Try going to <a href='/image?filename=image&width=300&height=300'>/image?filename=image&width=300&height=300</a>"
+  );
+});
+
+//image route
+app.use("/image", imageRoute);
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
 
 export default app;
