@@ -1,5 +1,16 @@
 import * as sharp from "sharp";
 import * as path from "path";
+import * as fs from "fs";
+
+//create "thumbs" directory
+const createThumbsDir = () => {
+  const thumbsDir = path.join(__dirname, "../../assets/thumbs"); // "thumbs" directory path url
+
+  // if "thumbs" directory doesn't exist
+  if (!fs.existsSync(thumbsDir)) {
+    fs.mkdirSync(thumbsDir); //create "thumbs" directory
+  }
+};
 
 export default class Img {
   name: unknown;
@@ -39,6 +50,7 @@ export default class Img {
 
     //Second: Resize
     try {
+      createThumbsDir();
       await sharp(this.getImgPath("full")) //read the given image from the "full" folder
         .resize(+(this.width as string), +(this.height as string)) //resize
         .toFile(this.getImgPath("thumbs")); //write the image to the "thumbs" folder
