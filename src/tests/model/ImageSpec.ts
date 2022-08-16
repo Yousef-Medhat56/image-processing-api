@@ -8,7 +8,7 @@ describe("Test (Img) class", () => {
     it("Test (getImgPath) method", () => {
       const imgPath = image.getImgPath("full");
       expect(imgPath).toBe(
-        path.join(__dirname, "..","..", "assets/full/image.jpg")
+        path.join(__dirname, "../../../assets/full/image.jpg")
       );
     });
   });
