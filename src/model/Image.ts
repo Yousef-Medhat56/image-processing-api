@@ -42,6 +42,7 @@ export default class Img {
   // Resize the image
   async resizeImg() {
     //First: validate the given width and height
+    // eslint-disable-next-line no-useless-catch
     try {
       this.validateWidthAndHeight();
     } catch (err) {
