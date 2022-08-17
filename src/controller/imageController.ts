@@ -7,13 +7,16 @@ const get_image = async (req: Request, res: Response) => {
 
     //create image object
     const image = new Img(filename, width, height);
+    // check if the filename is given
     if (filename) {
-      // check if the filename is given
+      //check if width and height are given
       if (width && height) {
-        //check if width and height are given
-        await image.resizeImg(); //resize the image then write ot to the "thumbs" folder
+        //check if the image doesn't exist
+        if (!image.checkIfExist()) {
+          await image.resizeImg(); //resize the image then write ot to the "thumbs" folder
+        }
 
-        res.sendFile(image.getImgPath("thumbs")); //send the image from the "thumbs" folder
+        res.sendFile(image.getImgPath("thumbs", image.width, image.height)); //send the image from the "thumbs" folder
       } else if (width || height) {
         //check if only the width or the height are given
         throw { status: 400, message: "Bad Request" }; //throw 400 error
