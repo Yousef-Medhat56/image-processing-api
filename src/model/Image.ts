@@ -24,7 +24,20 @@ export default class Img {
   }
 
   // get the image url path
-  getImgPath(folder: string) {
+  getImgPath(
+    folder: string,
+    width: unknown = undefined,
+    height: unknown = undefined
+  ) {
+    if (width && height) {
+      return path.join(
+        __dirname,
+        "../../assets",
+        folder,
+        `${this.name as string}-${width}-${height}.jpg`
+      );
+    }
+
     return path.join(
       __dirname,
       "../../assets",
@@ -39,8 +52,18 @@ export default class Img {
     else throw { status: 400, message: "Bad Request" };
   }
 
+  //check if the resized image exist
+  checkIfExist() {
+    const isImgExist = fs.existsSync(
+      this.getImgPath("thumbs", this.width, this.height)
+    );
+    if (isImgExist) return true;
+    return false;
+  }
+
   // Resize the image
   async resizeImg() {
+    console.log("Image Resized");
     //First: validate the given width and height
     // eslint-disable-next-line no-useless-catch
     try {
@@ -54,7 +77,7 @@ export default class Img {
       createThumbsDir();
       await sharp(this.getImgPath("full")) //read the given image from the "full" folder
         .resize(+(this.width as string), +(this.height as string)) //resize
-        .toFile(this.getImgPath("thumbs")); //write the image to the "thumbs" folder
+        .toFile(this.getImgPath("thumbs", this.width, this.height)); //write the image to the "thumbs" folder
     } catch (err) {
       //return 404 error becuase sharp can't find the image and read it
       throw { status: 404, message: "Not Found" };
