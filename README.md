@@ -7,7 +7,7 @@ A project for the **Advanced Full-Stack Web Development Nanodegree Program** off
 ### Intall dependencies
 `npm install`
 
-### Run server 
+### Run development server 
 `npm run dev`
 
 ### Build
@@ -18,6 +18,12 @@ A project for the **Advanced Full-Stack Web Development Nanodegree Program** off
 
 ### Test
 `npm run test`
+
+### Prettier
+`npm run prettier`
+
+### Lint
+`npm run lint`
 
 ## Usage
 1. Install the dependencies.
